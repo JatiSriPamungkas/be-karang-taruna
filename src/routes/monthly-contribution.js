@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
 	getLatestMonthlyContribution,
 	getAllMonthlyContribution,
-} from "../controller/monthly-contribution";
+} from "../controller/monthly-contribution.js";
 
 export const router = Router();
 

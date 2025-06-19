@@ -1,9 +1,11 @@
 {
 	"name": "be-karang-taruna",
 	"version": "1.0.0",
-	"main": "server.ts",
+	"type": "module",
+	"main": "server.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "nodemon server.js"
 	},
 	"author": "Jati Sri Pamungkas",
 	"license": "ISC",
@@ -13,10 +15,5 @@
 		"dotenv": "^16.5.0",
 		"express": "^5.1.0",
 		"mysql2": "^3.14.1"
-	},
-	"devDependencies": {
-		"@types/cors": "^2.8.19",
-		"@types/express": "^5.0.3",
-		"ts-node": "^10.9.2"
 	}
 }

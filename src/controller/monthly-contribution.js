@@ -1,10 +1,9 @@
 import {
 	getLatestMonthlyContributions,
 	getAllMonthlyContributions,
-} from "../models/monthly-contribution";
-import { RequestAndResponse } from "../types/types";
+} from "../models/monthly-contribution.js";
 
-export const getLatestMonthlyContribution = async ({ req, res }: RequestAndResponse) => {
+export const getLatestMonthlyContribution = async (req, res) => {
 	try {
 		const [data] = await getLatestMonthlyContributions();
 
@@ -19,7 +18,7 @@ export const getLatestMonthlyContribution = async ({ req, res }: RequestAndRespo
 	}
 };
 
-export const getAllMonthlyContribution = async ({ req, res }: RequestAndResponse) => {
+export const getAllMonthlyContribution = async (req, res) => {
 	try {
 		const [data] = await getAllMonthlyContributions();
 

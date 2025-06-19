@@ -1,4 +1,4 @@
-import { dbPool } from "../config/database";
+import { dbPool } from "../config/database.js";
 
 // GET METHOD
 export const getAllMonthlyContributions = () => {
