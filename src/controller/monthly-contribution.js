@@ -1,7 +1,11 @@
 import {
 	getLatestMonthlyContributions,
 	getAllMonthlyContributions,
+	createMonthlyContributions,
 } from "../models/monthly-contribution.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const getLatestMonthlyContribution = async (req, res) => {
 	try {
@@ -11,9 +15,10 @@ export const getLatestMonthlyContribution = async (req, res) => {
 			message: "GET: Success to get the latest monthly contribution!",
 			data: data,
 		});
-	} catch (error) {
+	} catch (err) {
 		res.status(500).json({
 			message: "GET: Failed to get the latest monthly contribution!",
+			error: err,
 		});
 	}
 };
@@ -26,9 +31,31 @@ export const getAllMonthlyContribution = async (req, res) => {
 			message: "GET: Success to get all monthly contribution!",
 			data: data,
 		});
-	} catch (error) {
+	} catch (err) {
 		res.status(500).json({
 			message: "GET: Failed to get all monthly contribution!",
+			error: err,
+		});
+	}
+};
+
+export const createMonthlyContribution = async (req, res) => {
+	const { nominal, id_created_by } = req.body;
+
+	try {
+		await createMonthlyContributions(nominal, id_created_by);
+
+		res.status(200).json({
+			message: "POST: Success to create monthly contribution",
+			data: {
+				id_created_by,
+				nominal,
+			},
+		});
+	} catch (err) {
+		res.status(500).json({
+			message: "POST: Failed to create monthly contribution!",
+			error: err,
 		});
 	}
 };
