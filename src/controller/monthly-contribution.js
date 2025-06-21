@@ -40,15 +40,15 @@ export const getAllMonthlyContribution = async (req, res) => {
 };
 
 export const createMonthlyContribution = async (req, res) => {
-	const { nominal, id_created_by } = req.body;
+	const { nominal, created_by } = req.body;
 
 	try {
-		await createMonthlyContributions(nominal, id_created_by);
+		await createMonthlyContributions(nominal, created_by);
 
 		res.status(200).json({
 			message: "POST: Success to create monthly contribution",
 			data: {
-				id_created_by,
+				created_by,
 				nominal,
 			},
 		});
