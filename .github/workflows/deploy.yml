@@ -13,9 +13,9 @@ jobs:
             - name: Deploy to VM via SSH
               uses: appleboy/ssh-action@master
               with:
-                  host: ${{secrets.VM_IP}}
-                  username: ${{secrets.VM_USER}}
-                  key: ${{secrets.VM_SSH_KEY}}
+                  host: ${{ secrets.VM_IP }}
+                  username: ${{ secrets.VM_USER }}
+                  key: ${{ secrets.VM_SSH_KEY }}
                   script: cd ~/api
                       git pull origin main
                       npm install
