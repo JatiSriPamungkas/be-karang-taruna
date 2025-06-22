@@ -2,7 +2,7 @@ import {
 	getLatestMonthlyContributions,
 	getAllMonthlyContributions,
 	createMonthlyContributions,
-} from "../models/monthly-contribution.js";
+} from "../models/monthly-contributions.js";
 import dotenv from "dotenv";
 
 dotenv.config();

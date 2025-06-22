@@ -3,7 +3,7 @@ import {
 	getLatestMonthlyContribution,
 	getAllMonthlyContribution,
 	createMonthlyContribution,
-} from "../controller/monthly-contribution.js";
+} from "../controller/monthly-contributions.js";
 
 export const router = Router();
 
