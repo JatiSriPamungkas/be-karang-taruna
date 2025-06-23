@@ -25,7 +25,7 @@ export const createMembers = (
 	last_update_by
 ) => {
 	const SQLQuery = `INSERT INTO members (email, telephone, fullname, nickname, gender, date_of_birth, id_location_detail, username, password, request_date, is_active, status, status_action_date, creation_date, created_by, last_update_date, last_update_by) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, NOW(), NOW(), ?, NOW(), ?);`;
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, 'pending', NOW(), NOW(), ?, NOW(), ?);`;
 
 	return dbPool.execute(SQLQuery, [
 		email,
