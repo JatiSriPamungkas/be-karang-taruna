@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
 	createLocation,
 	deleteLocation,
+	getAllLocation,
 	getLocation,
 	getLocationById,
 	updateLocation,
@@ -10,6 +11,7 @@ import {
 export const router = Router();
 
 router.get("/", getLocation);
+router.get("/all", getAllLocation);
 router.get("/:id_location", getLocationById);
 
 router.post("/", createLocation);

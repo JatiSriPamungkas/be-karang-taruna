@@ -41,3 +41,45 @@ export const createMembers = (
 		last_update_by,
 	]);
 };
+
+export const updateMembers = (
+	id_member,
+	email,
+	telephone,
+	fullname,
+	nickname,
+	gender,
+	date_of_birth,
+	id_location_detail,
+	username,
+	password,
+	is_active,
+	status,
+	created_by,
+	last_update_by
+) => {
+	const SQLQuery = `UPDATE members SET email = ?, telephone = ?, fullname = ?, nickname = ?, gender = ?, date_of_birth = ?, id_location_detail = ?, username = ?, password = ?, is_active = ?, status = ?, created_by = ?, last_update_date = NOW(), last_update_by = ? WHERE id_member = ?`;
+
+	return dbPool.execute(SQLQuery, [
+		email,
+		telephone,
+		fullname,
+		nickname,
+		gender,
+		date_of_birth,
+		id_location_detail,
+		username,
+		password,
+		is_active,
+		status,
+		created_by,
+		last_update_by,
+		id_member,
+	]);
+};
+
+export const deleteMembers = (id_member) => {
+	const SQLQuery = `DELETE FROM members WHERE id_member = ?`;
+
+	return dbPool.execute(SQLQuery, [id_member]);
+};

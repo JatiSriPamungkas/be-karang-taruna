@@ -1,6 +1,7 @@
 import {
 	createLocations,
 	deleteLocations,
+	getAllLocations,
 	getLocations,
 	getLocationsById,
 	updateLocations,
@@ -45,6 +46,22 @@ export const getLocationById = async (req, res) => {
 	} catch (err) {
 		res.status(500).json({
 			message: "GET: Failed to get location by id",
+			error: err,
+		});
+	}
+};
+
+export const getAllLocation = async (req, res) => {
+	try {
+		const [data] = await getAllLocations();
+
+		res.status(200).json({
+			message: "GET: Success to get all location",
+			data: data,
+		});
+	} catch (err) {
+		res.status(500).json({
+			message: "GET: Failed to get all location",
 			error: err,
 		});
 	}
