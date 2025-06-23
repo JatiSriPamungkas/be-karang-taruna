@@ -9,6 +9,12 @@ export const getMembers = (per_page, page, search, status) => {
 	return dbPool.execute(SQLQuery, [searchPattern, searchPattern]);
 };
 
+export const getCredentialMembers = (email, username) => {
+	const SQLQuery = `SELECT * FROM members WHERE email = ? OR username = ?;`;
+
+	return dbPool.execute(SQLQuery, [email, username]);
+};
+
 export const createMembers = (
 	email,
 	telephone,

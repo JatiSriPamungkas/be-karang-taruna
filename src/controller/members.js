@@ -1,4 +1,10 @@
-import { createMembers, deleteMembers, getMembers, updateMembers } from "../models/members.js";
+import {
+	createMembers,
+	deleteMembers,
+	getCredentialMembers,
+	getMembers,
+	updateMembers,
+} from "../models/members.js";
 
 export const getMember = async (req, res) => {
 	const { page, search, status } = req.query;
@@ -21,6 +27,24 @@ export const getMember = async (req, res) => {
 	} catch (err) {
 		res.status(500).json({
 			message: "GET: Failed to get members",
+			error: err,
+		});
+	}
+};
+
+export const getCredentialMember = async (req, res) => {
+	const { email, username } = req.query;
+
+	try {
+		const [data] = await getCredentialMembers(email, username);
+
+		res.status(200).json({
+			message: "GET: Success to get credentials members",
+			data: data,
+		});
+	} catch (err) {
+		res.status(500).json({
+			message: "GET: Failed to get credentials members",
 			error: err,
 		});
 	}
