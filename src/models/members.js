@@ -20,7 +20,6 @@ export const createMembers = (
 	username,
 	password,
 	is_active,
-	status,
 	created_by,
 	last_update_by
 ) => {
@@ -38,7 +37,6 @@ export const createMembers = (
 		username,
 		password,
 		is_active,
-		status,
 		created_by,
 		last_update_by,
 	]);
