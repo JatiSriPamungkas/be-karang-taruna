@@ -1,0 +1,45 @@
+import { dbPool } from "../config/database.js";
+
+export const getMembers = (per_page, page, search) => {
+	const searchPattern = `%${search}%`;
+	const offset = (page - 1) * per_page;
+
+	const SQLQuery = `SELECT * FROM members WHERE fullname LIKE ? OR nickname LIKE ? LIMIT ${per_page} OFFSET ${offset};`;
+
+	return dbPool.execute(SQLQuery, [searchPattern, searchPattern]);
+};
+
+export const createMembers = (
+	email,
+	telephone,
+	fullname,
+	nickname,
+	gender,
+	date_of_birth,
+	id_location_detail,
+	username,
+	password,
+	is_active,
+	status,
+	created_by,
+	last_update_by
+) => {
+	const SQLQuery = `INSERT INTO members (email, telephone, fullname, nickname, gender, date_of_birth, id_location_detail, username, password, request_date, is_active, status, status_action_date, creation_date, created_by, last_update_date, last_update_by) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, NOW(), NOW(), ?, NOW(), ?);`;
+
+	return dbPool.execute(SQLQuery, [
+		email,
+		telephone,
+		fullname,
+		nickname,
+		gender,
+		date_of_birth,
+		id_location_detail,
+		username,
+		password,
+		is_active,
+		status,
+		created_by,
+		last_update_by,
+	]);
+};

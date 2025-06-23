@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { router as monthlyContributionRouter } from "./src/routes/monthly-contributions.js";
 import { router as locationRouter } from "./src/routes/locations.js";
+import { router as memberRouter } from "./src/routes/members.js";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ const PORT = process.env.PORT || 4001;
 //Routes
 app.use("/api/monthly-contributions", monthlyContributionRouter);
 app.use("/api/locations", locationRouter);
+app.use("/api/members", memberRouter);
 
 // Home Greetings
 app.get("/", (req, res) => {
@@ -26,7 +28,7 @@ app.get("/", (req, res) => {
 
 // Fallback
 app.use((req, res) => {
-	res.send("<h1>Page not found!<h1>");
+	res.send("<h1>Page not found!</h1>");
 });
 
 // Listener
