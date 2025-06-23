@@ -1,10 +1,10 @@
 import { dbPool } from "../config/database.js";
 
-export const getMembers = (per_page, page, search) => {
+export const getMembers = (per_page, page, search, status) => {
 	const searchPattern = `%${search}%`;
 	const offset = (page - 1) * per_page;
 
-	const SQLQuery = `SELECT * FROM members WHERE fullname LIKE ? OR nickname LIKE ? LIMIT ${per_page} OFFSET ${offset};`;
+	const SQLQuery = `SELECT * FROM members WHERE status = '${status}' AND (fullname LIKE ? OR nickname LIKE ?)  LIMIT ${per_page} OFFSET ${offset};`;
 
 	return dbPool.execute(SQLQuery, [searchPattern, searchPattern]);
 };

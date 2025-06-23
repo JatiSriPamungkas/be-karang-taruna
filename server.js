@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { router as monthlyContributionRouter } from "./src/routes/monthly-contributions.js";
 import { router as locationRouter } from "./src/routes/locations.js";
 import { router as memberRouter } from "./src/routes/members.js";
+import { router as cashRouter } from "./src/routes/cashes.js";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ const PORT = process.env.PORT || 4001;
 app.use("/api/monthly-contributions", monthlyContributionRouter);
 app.use("/api/locations", locationRouter);
 app.use("/api/members", memberRouter);
+app.use("/api/cash/", cashRouter);
 
 // Home Greetings
 app.get("/", (req, res) => {

@@ -1,11 +1,11 @@
 import { createMembers, deleteMembers, getMembers, updateMembers } from "../models/members.js";
 
 export const getMember = async (req, res) => {
-	const { page, search } = req.query;
+	const { page, search, status } = req.query;
 	const per_page = 10;
 
 	try {
-		const [data] = await getMembers(per_page, Number(page), search);
+		const [data] = await getMembers(per_page, Number(page), search, status);
 
 		res.status(200).json({
 			message: "GET: Success to get members",
