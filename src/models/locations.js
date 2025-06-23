@@ -9,6 +9,12 @@ export const getLocations = (per_page, page, search) => {
 	return dbPool.execute(SQLQuery, [searchPattern, searchPattern]);
 };
 
+export const getLocationsById = (id_location) => {
+	const SQLQuery = `SELECT * FROM locations WHERE id_location = ?`;
+
+	return dbPool.execute(SQLQuery, [id_location]);
+};
+
 export const createLocations = (location_name, description, created_by, last_update_by) => {
 	const SQLQuery = `INSERT INTO locations (location_name, description, creation_date, created_by, last_update_date, last_update_by) 
                     VALUES (?, ?, NOW(), ?, NOW(), ?)`;

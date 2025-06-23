@@ -2,6 +2,7 @@ import {
 	createLocations,
 	deleteLocations,
 	getLocations,
+	getLocationsById,
 	updateLocations,
 } from "../models/locations.js";
 
@@ -26,6 +27,24 @@ export const getLocation = async (req, res) => {
 	} catch (err) {
 		res.status(500).json({
 			message: "GET: Failed to get location",
+			error: err,
+		});
+	}
+};
+
+export const getLocationById = async (req, res) => {
+	const { id_location } = req.params;
+
+	try {
+		const [data] = await getLocationsById(id_location);
+
+		res.status(200).json({
+			message: "GET: Success to get location by id",
+			data: data,
+		});
+	} catch (err) {
+		res.status(500).json({
+			message: "GET: Failed to get location by id",
 			error: err,
 		});
 	}

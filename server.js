@@ -5,8 +5,10 @@ import { router as monthlyContributionRouter } from "./src/routes/monthly-contri
 import { router as locationRouter } from "./src/routes/locations.js";
 
 dotenv.config();
+
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
@@ -17,14 +19,17 @@ const PORT = process.env.PORT || 4001;
 app.use("/api/monthly-contributions", monthlyContributionRouter);
 app.use("/api/locations", locationRouter);
 
-app.use("/", (req, res) => {
+// Home Greetings
+app.get("/", (req, res) => {
 	res.send("<h1>Hello from Server.ts</h1>");
 });
 
+// Fallback
 app.use((req, res) => {
 	res.send("<h1>Page not found!<h1>");
 });
 
+// Listener
 app.listen(PORT, () => {
 	console.log(`Server is listening at http://localhost:${PORT}`);
 });
