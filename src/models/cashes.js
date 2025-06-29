@@ -58,7 +58,16 @@ export const updateTransactions = (
 	const table = type == "income" ? "income" : "expense";
 	const data_field = type == "income" ? "id_income" : "id_expense";
 
-	const SQLQuery = `UPDATE ${table} SET nominal = ?, description = ?, created_by = ?, last_update_date = NOW(), last_update_by = ? WHERE ${data_field} = ?`;
+	const SQLQuery = `UPDATE ${table} SET nominal = ?,  description = ?, created_by = ?, last_update_date = NOW(), last_update_by = ? WHERE ${data_field} = ?`;
 
 	return dbPool.execute(SQLQuery, [nominal, description, created_by, last_update_by, id_field]);
+};
+
+export const deleteTransactions = (id_field, type) => {
+	const table = type == "income" ? "income" : "expense";
+	const data_field = type == "income" ? "id_income" : "id_expense";
+
+	const SQLQuery = `DELETE FROM ${table} WHERE ${data_field} = ?`;
+
+	return dbPool.execute(SQLQuery, [id_field]);
 };

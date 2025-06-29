@@ -1,4 +1,9 @@
-import { createNewTransactions, getCashes, updateTransactions } from "../models/cashes.js";
+import {
+	createNewTransactions,
+	deleteTransactions,
+	getCashes,
+	updateTransactions,
+} from "../models/cashes.js";
 
 export const getCash = async (req, res) => {
 	const { type, page, search } = req.query;
@@ -70,6 +75,24 @@ export const updateTransaction = async (req, res) => {
 	} catch (err) {
 		res.status(500).json({
 			message: "PATCH: Failed to update transaction",
+			error: err,
+		});
+	}
+};
+
+export const deleteTransaction = async (req, res) => {
+	const { id_field, type } = req.body;
+
+	try {
+		await deleteTransactions(id_field, type);
+
+		res.status(200).json({
+			message: "Success to delete transaction",
+			data: null,
+		});
+	} catch (err) {
+		res.status(500).json({
+			message: "DELETE: Failed to delete transaction",
 			error: err,
 		});
 	}
