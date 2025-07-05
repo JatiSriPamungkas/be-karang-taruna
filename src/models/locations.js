@@ -1,12 +1,20 @@
 import { dbPool } from "../config/database.js";
 
-export const getLocations = (per_page, page, search) => {
+export const getLocations = async (per_page, page, search) => {
 	const searchPattern = `%${search}%`;
 	const offset = (page - 1) * per_page;
 
-	const SQLQuery = `SELECT * FROM locations WHERE location_name LIKE ? OR description LIKE ? LIMIT ${per_page} OFFSET ${offset};`;
+	const SQLDataQuery = `SELECT * FROM locations WHERE location_name LIKE ? OR description LIKE ? LIMIT ${per_page} OFFSET ${offset};`;
 
-	return dbPool.execute(SQLQuery, [searchPattern, searchPattern]);
+	const SQLCountQuery = `SELECT COUNT(*) AS total FROM locations WHERE location_name LIKE ? OR description LIKE ?`;
+
+	const [dataLocation] = await dbPool.execute(SQLDataQuery, [searchPattern, searchPattern]);
+	const [countLocation] = await dbPool.execute(SQLCountQuery, [searchPattern, searchPattern]);
+
+	return {
+		dataLocation,
+		countLocation: countLocation[0].total,
+	};
 };
 
 export const getLocationsById = (id_location) => {

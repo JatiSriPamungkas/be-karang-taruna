@@ -12,16 +12,16 @@ export const getLocation = async (req, res) => {
 	const per_page = 10;
 
 	try {
-		const [data] = await getLocations(per_page, Number(page), search);
+		const { dataLocation, countLocation } = await getLocations(per_page, Number(page), search);
 
 		res.status(200).json({
 			message: "GET: Success to get location",
-			data: data,
+			data: dataLocation,
 			meta: {
 				page: Number(page),
 				per_page,
-				total_page: Math.ceil(data.length / per_page),
-				total_data: data.length,
+				total_page: Math.ceil(countLocation / per_page),
+				total_data: countLocation,
 				search,
 			},
 		});
