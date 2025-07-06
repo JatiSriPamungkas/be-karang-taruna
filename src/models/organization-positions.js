@@ -58,3 +58,11 @@ export const createOrganizationPosition = (
     last_update_by,
   ]);
 };
+
+export const deleteOrganizationPosition = (id_organization_position) => {
+  const SQLQuery = `
+    DELETE FROM organization_positions
+    WHERE id_organization_position = ?`;
+
+  return dbPool.execute(SQLQuery, [id_organization_position]);
+};

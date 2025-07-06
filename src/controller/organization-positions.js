@@ -1,6 +1,7 @@
 import {
   getOrganizationPositionsDataTable,
   createOrganizationPosition,
+  deleteOrganizationPosition,
 } from "../models/organization-positions.js";
 
 export const getOrganizationPositions = async (req, res) => {
@@ -53,6 +54,24 @@ export const insertOrganizationPosition = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "POST: Failed to create organization position",
+      error: err,
+    });
+  }
+};
+
+export const dropOrganizationPosition = async (req, res) => {
+  const { id_organization_position } = req.params;
+
+  try {
+    await deleteOrganizationPosition(id_organization_position);
+
+    res.status(200).json({
+      message: "DELETE: Success to delete organization position",
+      data: null,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "DELETE: Failed to delete organization position",
       error: err,
     });
   }
