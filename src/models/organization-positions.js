@@ -75,3 +75,25 @@ export const deleteOrganizationPosition = (id_organization_position) => {
 
   return dbPool.execute(SQLQuery, [id_organization_position]);
 };
+
+export const updateOrganizationPosition = (
+  id_organization_position,
+  position_name,
+  description,
+  last_update_by
+) => {
+  const SQLQuery = `
+    UPDATE organization_positions
+    SET name = ?,
+      description = ?,
+      last_update_date = NOW(),
+      last_update_by = ?
+    WHERE id_organization_position = ?`;
+
+  return dbPool.execute(SQLQuery, [
+    position_name,
+    description,
+    last_update_by,
+    id_organization_position,
+  ]);
+};
