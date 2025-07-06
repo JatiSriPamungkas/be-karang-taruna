@@ -10,7 +10,7 @@ export const getCash = async (req, res) => {
 	const per_page = 10;
 
 	try {
-		const [data] = await getCashes(type, per_page, Number(page), search);
+		const { data, total } = await getCashes(type, per_page, Number(page), search);
 
 		res.status(200).json({
 			message: "GET: Success to get cashes",
@@ -18,8 +18,8 @@ export const getCash = async (req, res) => {
 			meta: {
 				page: Number(page),
 				per_page,
-				total_page: Math.ceil(data.length / per_page),
-				total_data: data.length,
+				total_page: Math.ceil(total / per_page),
+				total_data: total,
 				search,
 			},
 		});

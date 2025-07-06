@@ -1,12 +1,19 @@
 import { dbPool } from "../config/database.js";
 
-export const getMembers = (per_page, page, search, status) => {
+export const getMembers = async (per_page, page, search, status) => {
 	const searchPattern = `%${search}%`;
 	const offset = (page - 1) * per_page;
 
-	const SQLQuery = `SELECT * FROM members WHERE status = '${status}' AND (fullname LIKE ? OR nickname LIKE ?)  LIMIT ${per_page} OFFSET ${offset};`;
+	const SQLDataQuery = `SELECT * FROM members WHERE status = '${status}' AND (fullname LIKE ? OR nickname LIKE ?)  LIMIT ${per_page} OFFSET ${offset};`;
+	const SQLCountQuery = `SELECT COUNT(*) as Total FROM members;`;
 
-	return dbPool.execute(SQLQuery, [searchPattern, searchPattern]);
+	const [data] = await dbPool.execute(SQLDataQuery, [searchPattern, searchPattern]);
+	const [total] = await dbPool.execute(SQLCountQuery);
+
+	return {
+		data,
+		total: total[0].Total,
+	};
 };
 
 export const getCredentialMembers = (email, username) => {

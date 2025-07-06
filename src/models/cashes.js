@@ -1,10 +1,10 @@
 import { dbPool } from "../config/database.js";
 
-export const getCashes = (type, per_page, page, search) => {
+export const getCashes = async (type, per_page, page, search) => {
 	const searchPattern = `%${search}%`;
 	const offset = (page - 1) * per_page;
 
-	const SQLQuery = `SELECT * FROM (
+	const SQLDataQuery = `SELECT * FROM (
                     SELECT 
                         id_income as id,
                         income_date as date,
@@ -33,8 +33,43 @@ export const getCashes = (type, per_page, page, search) => {
                     ORDER BY date DESC
                     LIMIT ${per_page} OFFSET ${offset};
                     `;
+
+	const SQLCountQuery = `SELECT COUNT(*) AS Total FROM (
+                    SELECT 
+                        id_income as id,
+                        income_date as date,
+                        'income' as type,
+                        nominal,
+                        description,
+                        creation_date,
+                        created_by,
+                        last_update_date,
+                        last_update_by
+                    FROM income
+                    UNION ALL
+                    SELECT 
+                        id_expense as id,
+                        expense_date as date,
+                        'expense' as type,
+                        nominal,
+                        description,
+                        creation_date,
+                        created_by,
+                        last_update_date,
+                        last_update_by
+                    FROM expense
+                    ) AS cashes
+                    `;
+
 	const params = type ? [searchPattern, type] : [searchPattern];
-	return dbPool.execute(SQLQuery, params);
+
+	const [data] = await dbPool.execute(SQLDataQuery, params);
+	const [total] = await dbPool.execute(SQLCountQuery);
+
+	return {
+		data,
+		total: total[0].Total,
+	};
 };
 
 export const createNewTransactions = (type, nominal, description, created_by, last_update_by) => {
