@@ -1,4 +1,7 @@
-import { getOrganizationPositionsDataTable } from "../models/organization-positions.js";
+import {
+  getOrganizationPositionsDataTable,
+  createOrganizationPosition,
+} from "../models/organization-positions.js";
 
 export const getOrganizationPositions = async (req, res) => {
   const { page, search } = req.query;
@@ -22,6 +25,34 @@ export const getOrganizationPositions = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "GET: Failed to get Organization Positions",
+      error: err,
+    });
+  }
+};
+
+export const insertOrganizationPosition = async (req, res) => {
+  const { position_name, description, created_by, last_update_by } = req.body;
+
+  try {
+    await createOrganizationPosition(
+      position_name,
+      description,
+      created_by,
+      last_update_by
+    );
+
+    res.status(200).json({
+      message: "POST: Success to create organization position",
+      data: {
+        position_name,
+        description,
+        created_by,
+        last_update_by,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "POST: Failed to create organization position",
       error: err,
     });
   }

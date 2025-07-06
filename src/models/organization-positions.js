@@ -34,3 +34,27 @@ export const getOrganizationPositionsDataTable = async (
     countOrganizationPositions: countOrganizationPositions[0].total,
   };
 };
+
+export const createOrganizationPosition = (
+  position_name,
+  description,
+  created_by,
+  last_update_by
+) => {
+  const SQLQuery = `
+    INSERT INTO organization_positions (
+      name,
+      description,
+      creation_date,
+      created_by,
+      last_update_date,
+      last_update_by) 
+    VALUES (?, ?, NOW(), ?, NOW(), ?)`;
+
+  return dbPool.execute(SQLQuery, [
+    position_name,
+    description,
+    created_by,
+    last_update_by,
+  ]);
+};
