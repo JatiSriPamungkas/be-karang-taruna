@@ -48,12 +48,27 @@ export const createMembers = (
   id_location_detail,
   username,
   password,
-  is_active,
   created_by,
-  last_update_by
+  status
 ) => {
-  const SQLQuery = `INSERT INTO members (email, telephone, fullname, nickname, gender, date_of_birth, id_location_detail, username, password, request_date, is_active, status, status_action_date, creation_date, created_by, last_update_date, last_update_by) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, 'pending', NOW(), NOW(), ?, NOW(), ?);`;
+  const SQLQuery = `
+    INSERT INTO members (
+      email,
+      telephone,
+      fullname,
+      nickname,
+      gender,
+      date_of_birth,
+      id_location_detail,
+      username,
+      password,
+      request_date,
+      is_active,
+      status,
+      creation_date,
+      created_by) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 1, ?, NOW(), ?);
+  `;
 
   return dbPool.execute(SQLQuery, [
     email,
@@ -65,9 +80,8 @@ export const createMembers = (
     id_location_detail,
     username,
     password,
-    is_active,
+    status,
     created_by,
-    last_update_by,
   ]);
 };
 
