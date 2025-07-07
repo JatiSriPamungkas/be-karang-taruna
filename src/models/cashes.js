@@ -72,14 +72,21 @@ export const getCashes = async (type, per_page, page, search) => {
 	};
 };
 
-export const createNewTransactions = (type, nominal, description, created_by, last_update_by) => {
+export const createNewTransactions = (
+	date,
+	type,
+	nominal,
+	description,
+	created_by,
+	last_update_by
+) => {
 	const table = type == "income" ? "income" : "expense";
 	const date_field = type == "income" ? "income_date" : "expense_date";
 
 	const SQLQuery = `INSERT INTO ${table} (${date_field}, nominal, description, creation_date, created_by, last_update_date, last_update_by)
-                    VALUES (NOW(), ?, ?, NOW(), ?, NOW(), ?);`;
+                    VALUES (?, ?, ?, NOW(), ?, NOW(), ?);`;
 
-	return dbPool.execute(SQLQuery, [nominal, description, created_by, last_update_by]);
+	return dbPool.execute(SQLQuery, [date, nominal, description, created_by, last_update_by]);
 };
 
 export const updateTransactions = (

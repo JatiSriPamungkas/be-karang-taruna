@@ -32,14 +32,15 @@ export const getCash = async (req, res) => {
 };
 
 export const createNewTransaction = async (req, res) => {
-	const { type, nominal, description, created_by, last_update_by } = req.body;
+	const { date, type, nominal, description, created_by, last_update_by } = req.body;
 
 	try {
-		await createNewTransactions(type, nominal, description, created_by, last_update_by);
+		await createNewTransactions(date, type, nominal, description, created_by, last_update_by);
 
 		res.status(200).json({
 			message: "POST: Success to create transaction",
 			data: {
+				date,
 				type,
 				nominal,
 				description,
