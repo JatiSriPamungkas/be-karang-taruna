@@ -5,23 +5,27 @@ export const getMembers = async (per_page, page, search, status) => {
   const offset = (page - 1) * per_page;
 
   const SQLDataQuery = `
-		SELECT *
-		FROM members
-		WHERE status = '${status}' AND (fullname LIKE ? OR nickname LIKE ?)
+		SELECT m.*, l.location_name
+		FROM members m
+    LEFT JOIN locations s ON s.id_location = m.id_location_detail
+		WHERE m.status = '${status}' AND (m.fullname LIKE ? OR m.nickname LIKE ? OR s.location_name LIKE ?)
 		LIMIT ${per_page} OFFSET ${offset};
 	`;
 
   const SQLCountQuery = `
 		SELECT COUNT(*) as Total
-		FROM members
-		WHERE status = '${status}' AND (fullname LIKE ? OR nickname LIKE ?);
+		FROM members m
+    LEFT JOIN locations s ON s.id_location = m.id_location_detail
+		WHERE m.status = '${status}' AND (m.fullname LIKE ? OR m.nickname LIKE ? OR s.location_name LIKE ?);
 	`;
 
   const [data] = await dbPool.execute(SQLDataQuery, [
     searchPattern,
     searchPattern,
+    searchPattern,
   ]);
   const [total] = await dbPool.execute(SQLCountQuery, [
+    searchPattern,
     searchPattern,
     searchPattern,
   ]);
@@ -98,10 +102,9 @@ export const updateMembers = (
   password,
   is_active,
   status,
-  created_by,
   last_update_by
 ) => {
-  const SQLQuery = `UPDATE members SET email = ?, telephone = ?, fullname = ?, nickname = ?, gender = ?, date_of_birth = ?, id_location_detail = ?, username = ?, password = ?, is_active = ?, status = ?, created_by = ?, last_update_date = NOW(), last_update_by = ? WHERE id_member = ?`;
+  const SQLQuery = `UPDATE members SET email = ?, telephone = ?, fullname = ?, nickname = ?, gender = ?, date_of_birth = ?, id_location_detail = ?, username = ?, password = ?, is_active = ?, status = ?, last_update_date = NOW(), last_update_by = ? WHERE id_member = ?`;
 
   return dbPool.execute(SQLQuery, [
     email,
@@ -115,7 +118,6 @@ export const updateMembers = (
     password,
     is_active,
     status,
-    created_by,
     last_update_by,
     id_member,
   ]);

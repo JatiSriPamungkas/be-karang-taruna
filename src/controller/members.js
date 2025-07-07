@@ -123,7 +123,6 @@ export const updateMember = async (req, res) => {
     password,
     is_active,
     status,
-    created_by,
     last_update_by,
   } = req.body;
 
@@ -141,7 +140,6 @@ export const updateMember = async (req, res) => {
       password,
       is_active,
       status,
-      created_by,
       last_update_by
     );
 
@@ -160,7 +158,6 @@ export const updateMember = async (req, res) => {
         password,
         is_active,
         status,
-        created_by,
         last_update_by,
       },
     });
