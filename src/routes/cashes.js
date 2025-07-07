@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
 	createNewTransaction,
 	deleteTransaction,
+	getCashByType,
 	getCash,
 	updateTransaction,
 } from "../controller/cashes.js";
@@ -9,6 +10,7 @@ import {
 export const router = Router();
 
 router.get("/", getCash);
+router.get("/all", getCashByType);
 
 router.post("/", createNewTransaction);
 
