@@ -76,6 +76,36 @@ export const getCashes = async (type, per_page, page, search) => {
 	};
 };
 
+export const getCashesByType = (type) => {
+	const SQLQuery = `SELECT * FROM (
+                    SELECT 
+                        id_income as id,
+                        income_date as date,
+                        'income' as type,
+                        nominal,
+                        description,
+                        creation_date,
+                        created_by,
+                        last_update_date,
+                        last_update_by
+                    FROM income
+                    UNION ALL
+                    SELECT 
+                        id_expense as id,
+                        expense_date as date,
+                        'expense' as type,
+                        nominal,
+                        description,
+                        creation_date,
+                        created_by,
+                        last_update_date,
+                        last_update_by
+                    FROM expense
+                    ) AS cashes ${type ? "WHERE type = ?" : ""}`;
+
+	return dbPool.execute(SQLQuery, [type]);
+};
+
 export const createNewTransactions = (
 	date,
 	type,

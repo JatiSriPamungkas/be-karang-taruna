@@ -1,6 +1,7 @@
 import {
 	createNewTransactions,
 	deleteTransactions,
+	getCashesByType,
 	getCashes,
 	updateTransactions,
 } from "../models/cashes.js";
@@ -26,6 +27,24 @@ export const getCash = async (req, res) => {
 	} catch (err) {
 		res.status(500).json({
 			message: "GET: Failed to get cashes",
+			error: err,
+		});
+	}
+};
+
+export const getCashByType = async (req, res) => {
+	const { type } = req.query;
+
+	try {
+		const [data] = await getCashesByType(type);
+
+		res.status(200).json({
+			message: "GET: Success to get all cashes",
+			data: data,
+		});
+	} catch (err) {
+		res.status(500).json({
+			message: "GET: Failed to get all cashes",
 			error: err,
 		});
 	}
