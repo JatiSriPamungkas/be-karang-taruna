@@ -29,7 +29,9 @@ export const getCashes = async (type, per_page, page, search) => {
                         last_update_by
                     FROM expense
                     ) AS cashes
-                    WHERE description LIKE ? ${type ? "AND type = ?" : ""}
+                    WHERE date LIKE ? OR type LIKE ? OR description LIKE ? ${
+						type ? "AND type = ?" : ""
+					}
                     ORDER BY date DESC
                     LIMIT ${per_page} OFFSET ${offset};
                     `;
@@ -61,7 +63,9 @@ export const getCashes = async (type, per_page, page, search) => {
                     ) AS cashes
                     `;
 
-	const params = type ? [searchPattern, type] : [searchPattern];
+	const params = type
+		? [searchPattern, searchPattern, searchPattern, type]
+		: [searchPattern, searchPattern, searchPattern];
 
 	const [data] = await dbPool.execute(SQLDataQuery, params);
 	const [total] = await dbPool.execute(SQLCountQuery);
