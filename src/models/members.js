@@ -5,7 +5,7 @@ export const getMembers = async (per_page, page, search, status) => {
   const offset = (page - 1) * per_page;
 
   const SQLDataQuery = `
-		SELECT m.*, l.location_name
+		SELECT m.*, s.location_name
 		FROM members m
     LEFT JOIN locations s ON s.id_location = m.id_location_detail
 		WHERE m.status = '${status}' AND (m.fullname LIKE ? OR m.nickname LIKE ? OR s.location_name LIKE ?)
