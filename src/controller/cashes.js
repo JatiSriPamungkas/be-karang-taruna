@@ -4,7 +4,6 @@ import {
 	getCashesByType,
 	getCashes,
 	updateTransactions,
-	getCashesInMonth,
 } from "../models/cashes.js";
 
 export const getCash = async (req, res) => {
@@ -46,22 +45,6 @@ export const getCashByType = async (req, res) => {
 	} catch (err) {
 		res.status(500).json({
 			message: "GET: Failed to get all cashes",
-			error: err,
-		});
-	}
-};
-
-export const getCashInMonth = async (req, res) => {
-	try {
-		const [data] = await getCashesInMonth();
-
-		res.status(200).json({
-			message: "GET: Success to get cashes in month",
-			data: data,
-		});
-	} catch (err) {
-		res.status(500).json({
-			message: "GET: Failed to get cashes in month",
 			error: err,
 		});
 	}

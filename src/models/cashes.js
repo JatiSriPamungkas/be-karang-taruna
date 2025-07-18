@@ -101,39 +101,11 @@ export const getCashesByType = (type) => {
                         last_update_date,
                         last_update_by
                     FROM expense
-                    ) AS cashes WHERE  ${type ? "type = ?" : ""} `;
+                    ) AS cashes WHERE date >= CURDATE() - INTERVAL 30 DAY ${
+						type ? "type = ?" : ""
+					} ORDER BY date DESC`;
 
 	return dbPool.execute(SQLQuery, [type]);
-};
-
-export const getCashesInMonth = () => {
-	const SQLQuery = `SELECT * FROM (
-                    SELECT 
-                        id_income as id,
-                        income_date as date,
-                        'income' as type,
-                        nominal,
-                        description,
-                        creation_date,
-                        created_by,
-                        last_update_date,
-                        last_update_by
-                    FROM income
-                    UNION ALL
-                    SELECT 
-                        id_expense as id,
-                        expense_date as date,
-                        'expense' as type,
-                        nominal,
-                        description,
-                        creation_date,
-                        created_by,
-                        last_update_date,
-                        last_update_by
-                    FROM expense
-                    ) AS cashes WHERE date >= CURDATE() - INTERVAL 30 DAY ORDER BY date DESC;`;
-
-	return dbPool.execute(SQLQuery);
 };
 
 export const createNewTransactions = (
