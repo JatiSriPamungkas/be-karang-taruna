@@ -36,6 +36,17 @@ export const getMembers = async (per_page, page, search, status) => {
   };
 };
 
+export const selectMemberById = (id_member) => {
+  const SQLQuery = `
+    SELECT m.*, s.location_name
+		FROM members m
+    LEFT JOIN locations s ON s.id_location = m.id_location_detail
+    WHERE m.id_member = ?;
+  `;
+
+  return dbPool.execute(SQLQuery, [id_member]);
+};
+
 export const getCredentialMembers = (email, username) => {
   const SQLQuery = `SELECT * FROM members WHERE email = ? OR username = ?;`;
 

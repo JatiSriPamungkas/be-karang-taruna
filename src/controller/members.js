@@ -4,6 +4,7 @@ import {
   getCredentialMembers,
   getMembers,
   updateMembers,
+  selectMemberById,
 } from "../models/members.js";
 
 export const getMember = async (req, res) => {
@@ -182,6 +183,24 @@ export const deleteMember = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "DELETE: Failed to delete members",
+      error: err,
+    });
+  }
+};
+
+export const getMemberById = async (req, res) => {
+  const { id_member } = req.params;
+
+  try {
+    const [data] = await selectMemberById(id_member);
+
+    res.status(200).json({
+      message: "GET: Success to get member by id",
+      data: data,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "GET: Failed to get member by id",
       error: err,
     });
   }
