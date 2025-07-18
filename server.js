@@ -22,20 +22,20 @@ const PORT = process.env.PORT || 4001;
 app.use("/api/monthly-contributions", monthlyContributionRouter);
 app.use("/api/locations", locationRouter);
 app.use("/api/members", memberRouter);
-app.use("/api/cash/", cashRouter);
+app.use("/api/cash", cashRouter);
 app.use("/api/organization-positions/", organizationPositions);
 
 // Home Greetings
 app.get("/", (req, res) => {
-  res.send("<h1>Hello from Server.ts</h1>");
+	res.send("<h1>Hello from Server.ts</h1>");
 });
 
 // Fallback
 app.use((req, res) => {
-  res.send("<h1>Page not found!</h1>");
+	res.send("<h1>Page not found!</h1>");
 });
 
 // Listener
 app.listen(PORT, () => {
-  console.log(`Server is listening at http://localhost:${PORT}`);
+	console.log(`Server is listening at http://localhost:${PORT}`);
 });
