@@ -39,12 +39,12 @@ export const getCashByType = async (req, res) => {
 		const [data] = await getCashesByType(type);
 
 		res.status(200).json({
-			message: "GET: Success to get all cashes",
+			message: "GET: Success to get cashes in month",
 			data: data,
 		});
 	} catch (err) {
 		res.status(500).json({
-			message: "GET: Failed to get all cashes",
+			message: "GET: Failed to get cashes in month",
 			error: err,
 		});
 	}

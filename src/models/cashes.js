@@ -102,7 +102,7 @@ export const getCashesByType = (type) => {
                         last_update_by
                     FROM expense
                     ) AS cashes WHERE date >= CURDATE() - INTERVAL 30 DAY ${
-						type ? "type = ?" : ""
+						type ? "AND type = ?" : ""
 					} ORDER BY date DESC`;
 
 	return dbPool.execute(SQLQuery, [type]);
