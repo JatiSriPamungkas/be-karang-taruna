@@ -39,10 +39,17 @@ export const getOrganizationPositionDataById = async (req, res) => {
   try {
     const [data] = await getOrganizationPositionById(id_organization_position);
 
-    res.status(200).json({
-      message: "GET: Success to get organization position by id",
-      data: data.length > 0 ? data[0] : [],
-    });
+    if (data.length > 0) {
+      res.status(200).json({
+        message: "GET: Success to get organization position by id",
+        data: data[0],
+      });
+    } else {
+      res.status(404).json({
+        message: `Not Found: Organization position with id ${id_organization_position} not found!`,
+        data: data[0],
+      });
+    }
   } catch (err) {
     res.status(500).json({
       message: "GET: Failed to get organization position by id",
