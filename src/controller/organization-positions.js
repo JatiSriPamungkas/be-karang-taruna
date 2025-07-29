@@ -41,7 +41,7 @@ export const getOrganizationPositionDataById = async (req, res) => {
 
     res.status(200).json({
       message: "GET: Success to get organization position by id",
-      data: data,
+      data: data.length > 0 ? data[0] : [],
     });
   } catch (err) {
     res.status(500).json({
