@@ -1,4 +1,7 @@
-import { getAllOrganizationPeriods } from "../models/organization-periods.js";
+import {
+  getAllOrganizationPeriods,
+  insertOrganizationPeriod,
+} from "../models/organization-periods.js";
 
 export const getOrganizationPeriods = async (req, res) => {
   try {
