@@ -2,7 +2,7 @@ import { getAllOrganizationPeriods } from "../models/organization-periods.js";
 
 export const getOrganizationPeriods = async (req, res) => {
   try {
-    const { OrganizationPeriods } = await getAllOrganizationPeriods();
+    const [ OrganizationPeriods ] = await getAllOrganizationPeriods();
 
     res.status(200).json({
       message: "GET: Success to get Organization Periods",
