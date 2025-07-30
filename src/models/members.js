@@ -112,7 +112,6 @@ export const updateMembers = (
   username,
   password,
   is_active,
-  status,
   last_update_by
 ) => {
   let setClauses = [
@@ -125,7 +124,6 @@ export const updateMembers = (
     "id_location_detail = ?",
     "username = ?",
     "is_active = ?",
-    "status = ?",
     "last_update_date = NOW()",
     "last_update_by = ?",
   ];
@@ -140,7 +138,6 @@ export const updateMembers = (
     id_location_detail,
     username,
     is_active,
-    status,
     last_update_by,
   ];
 
