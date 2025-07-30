@@ -202,3 +202,21 @@ export const getMemberById = async (req, res) => {
     });
   }
 };
+
+export const deactivateMember = async (req, res) => {
+  const { id_member } = req.params;
+
+  try {
+    const [data] = await deactivateMemberById(id_member);
+
+    res.status(200).json({
+      message: "PATCH: Success to deactivate member by id",
+      data: data,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "PATCH: Failed to deactivate member by id",
+      error: err,
+    });
+  }
+};
