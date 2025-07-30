@@ -38,7 +38,7 @@ export const submitOrganizationPeriod = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
-      message: "POST: Failed to add new organization period",
+      message: "POST: Failed to add new organization period" + err,
       error: err,
     });
   }
