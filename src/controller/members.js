@@ -164,7 +164,7 @@ export const updateMember = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
-      message: "PATCH: Failed to update members",
+      message: "PATCH: Failed to update members, " + err,
       error: err,
     });
   }
