@@ -115,7 +115,9 @@ export const updateMembers = (
   status,
   last_update_by
 ) => {
-  const SQLQuery = `UPDATE members SET email = ?, telephone = ?, fullname = ?, nickname = ?, gender = ?, date_of_birth = ?, id_location_detail = ?, username = ?, password = ?, is_active = ?, status = ?, last_update_date = NOW(), last_update_by = ? WHERE id_member = ?`;
+  const SQLQuery = `UPDATE members SET email = ?, telephone = ?, fullname = ?, nickname = ?, gender = ?, date_of_birth = ?, id_location_detail = ?, username = ?, ${
+    password ? `password = '${password}'` : ""
+  } is_active = ?, status = ?, last_update_date = NOW(), last_update_by = ? WHERE id_member = ?`;
 
   return dbPool.execute(SQLQuery, [
     email,
@@ -126,7 +128,6 @@ export const updateMembers = (
     date_of_birth,
     id_location_detail,
     username,
-    password,
     is_active,
     status,
     last_update_by,
