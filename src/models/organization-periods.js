@@ -2,7 +2,7 @@ import { dbPool } from "../config/database.js";
 
 export const getAllOrganizationPeriods = async () => {
   const SQLQuery = `
-    SELECT * FROM organization_periode`;
+    SELECT * FROM organization_periode ORDER BY start_periode DESC`;
 
   return dbPool.execute(SQLQuery);
 };
