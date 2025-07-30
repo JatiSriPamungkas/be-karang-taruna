@@ -115,24 +115,47 @@ export const updateMembers = (
   status,
   last_update_by
 ) => {
-  const SQLQuery = `UPDATE members SET email = ?, telephone = ?, fullname = ?, nickname = ?, gender = ?, date_of_birth = ?, id_location_detail = ?, username = ?, ${
-    password ? `password = '${password}'` : ""
-  } is_active = ?, status = ?, last_update_date = NOW(), last_update_by = ? WHERE id_member = ?`;
+  let setClauses = [
+    "email = ?",
+    "telephone = ?",
+    "fullname = ?",
+    "nickname = ?",
+    "gender = ?",
+    "date_of_birth = ?",
+    "id_location_detail = ?",
+    "username = ?",
+    "is_active = ?",
+    "status = ?",
+    "last_update_date = NOW()",
+    "last_update_by = ?",
+  ];
 
-  return dbPool.execute(SQLQuery, [
+  let params = [
     email,
-    telephone,
+    telephone || null,
     fullname,
     nickname,
     gender,
-    date_of_birth,
+    date_of_birth || null,
     id_location_detail,
     username,
     is_active,
     status,
     last_update_by,
-    id_member,
-  ]);
+  ];
+
+  if (password) {
+    setClauses.push("password = ?");
+    params.push(password);
+  }
+
+  params.push(id_member);
+
+  const SQLQuery = `UPDATE members SET ${setClauses.join(
+    ", "
+  )} WHERE id_member = ?`;
+
+  return dbPool.execute(SQLQuery, params);
 };
 
 export const deleteMembers = (id_member) => {
