@@ -6,6 +6,7 @@ import { router as locationRouter } from "./src/routes/locations.js";
 import { router as memberRouter } from "./src/routes/members.js";
 import { router as cashRouter } from "./src/routes/cashes.js";
 import { router as organizationPositions } from "./src/routes/organization-positions.js";
+import { router as organizationPeriods } from "./src/routes/organization-periods.js";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use("/api/locations", locationRouter);
 app.use("/api/members", memberRouter);
 app.use("/api/cash", cashRouter);
 app.use("/api/organization-positions/", organizationPositions);
+app.use("/api/organization-periods/", organizationPeriods);
 
 // Home Greetings
 app.get("/", (req, res) => {
