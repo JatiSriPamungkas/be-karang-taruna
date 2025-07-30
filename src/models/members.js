@@ -166,3 +166,9 @@ export const deactivateMemberById = (id_member) => {
 
   return dbPool.execute(SQLQuery, [id_member]);
 };
+
+export const activateMemberById = (id_member) => {
+  const SQLQuery = `UPDATE members SET is_active = true WHERE id_member = ?`;
+
+  return dbPool.execute(SQLQuery, [id_member]);
+};

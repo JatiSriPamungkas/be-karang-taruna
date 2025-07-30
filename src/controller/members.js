@@ -6,6 +6,7 @@ import {
   updateMembers,
   selectMemberById,
   deactivateMemberById,
+  activateMemberById,
 } from "../models/members.js";
 
 export const getMember = async (req, res) => {
@@ -217,6 +218,24 @@ export const deactivateMember = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "PATCH: Failed to deactivate member by id" + err,
+      error: err,
+    });
+  }
+};
+
+export const activateMember = async (req, res) => {
+  const { id_member } = req.params;
+
+  try {
+    const [data] = await activateMemberById(id_member);
+
+    res.status(200).json({
+      message: "PATCH: Success to activate member by id",
+      data: data,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "PATCH: Failed to activate member by id" + err,
       error: err,
     });
   }

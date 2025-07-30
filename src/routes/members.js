@@ -6,6 +6,7 @@ import {
   getMember,
   updateMember,
   deactivateMember,
+  activateMember,
 } from "../controller/members.js";
 import { createMember } from "../controller/members.js";
 
@@ -19,5 +20,6 @@ router.post("/", createMember);
 
 router.patch("/", updateMember);
 router.patch("/deactivate/:id_member", deactivateMember);
+router.patch("/activate/:id_member", activateMember);
 
 router.delete("/:id_member", deleteMember);
