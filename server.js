@@ -36,6 +36,6 @@ app.use((req, res) => {
 });
 
 // Listener
-app.listen(PORT, () => {
-	console.log(`Server is listening at http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+	console.log(`Server is listening at http://20.2.85.195:${PORT}`);
 });
