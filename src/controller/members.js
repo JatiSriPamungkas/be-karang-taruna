@@ -5,6 +5,7 @@ import {
   getMembers,
   updateMembers,
   selectMemberById,
+  deactivateMemberById,
 } from "../models/members.js";
 
 export const getMember = async (req, res) => {
