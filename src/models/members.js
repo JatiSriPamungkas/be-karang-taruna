@@ -172,3 +172,9 @@ export const activateMemberById = (id_member) => {
 
   return dbPool.execute(SQLQuery, [id_member]);
 };
+
+export const updateStatusMember = (id_member, status) => {
+  const SQLQuery = `UPDATE members SET status = ? WHERE id_member = ?`;
+
+  return dbPool.execute(SQLQuery, [status, id_member]);
+};
