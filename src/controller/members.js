@@ -215,7 +215,7 @@ export const deactivateMember = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
-      message: "PATCH: Failed to deactivate member by id",
+      message: "PATCH: Failed to deactivate member by id" + err,
       error: err,
     });
   }
