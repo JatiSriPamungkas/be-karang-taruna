@@ -30,3 +30,22 @@ export const getOrganizationPositionByPeriod = (id_organization_period) => {
 
   return dbPool.execute(SQLQuery, [id_organization_period]);
 };
+
+export const updateStructureMember = (
+  id_organization_structure,
+  id_member,
+  last_update_by
+) => {
+  const SQLQuery = `
+    UPDATE organization_structure
+    SET id_member = ?,
+      last_update_date = NOW(),
+      last_update_by = ?
+    WHERE id_organization_structure = ?`;
+
+  return dbPool.execute(SQLQuery, [
+    id_member,
+    last_update_by,
+    id_organization_structure,
+  ]);
+};

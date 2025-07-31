@@ -1,6 +1,7 @@
 import {
   insertPosition,
   getOrganizationPositionByPeriod,
+  updateStructureMember
 } from "../models/organization-structure.js";
 
 export const addPosition = async (req, res) => {
@@ -52,6 +53,32 @@ export const getPositionsByPeriod = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "GET: Failed to get organization position by period" + err,
+      error: err,
+    });
+  }
+};
+
+export const setPositionMember = async (req, res) => {
+  const { id_organization_structure, id_member, last_update_by } = req.body;
+
+  try {
+    await updateStructureMember(
+      id_organization_structure,
+      id_member,
+      last_update_by
+    );
+
+    res.status(200).json({
+      message: "POST: Success to select member to structure",
+      data: {
+        id_organization_structure,
+        id_member,
+        last_update_by,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "POST: Failed to select member to structure" + err,
       error: err,
     });
   }
