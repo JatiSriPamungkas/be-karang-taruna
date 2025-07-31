@@ -1,6 +1,7 @@
 import {
   getMonthlyMeetingsDataTable,
   insertMonthlyMeeting,
+  getMonthlyMeetingsById,
 } from "../models/monthly-meetings.js";
 import dotenv from "dotenv";
 
@@ -33,6 +34,31 @@ export const monthlyMeetingsDataTable = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "GET: Failed to get monthly meetings",
+      error: err,
+    });
+  }
+};
+
+export const monthlyMeetingsById = async (req, res) => {
+  const { id_monthly_meeting } = req.params;
+
+  try {
+    const [data] = await getMonthlyMeetingsById(id_monthly_meeting);
+
+    if (data.length > 0) {
+      res.status(200).json({
+        message: "GET: Success to get monthly meeting by id",
+        data: data[0],
+      });
+    } else {
+      res.status(404).json({
+        message: `Not Found: Monthly meeting with id ${id_organization_position} not found!`,
+        data: data[0],
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: "GET: Failed to get monthly meeting by id",
       error: err,
     });
   }

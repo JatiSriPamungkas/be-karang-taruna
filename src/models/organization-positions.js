@@ -43,13 +43,13 @@ export const getOrganizationPositionsAll = async () => {
   return dbPool.execute(SQLQuery);
 };
 
-export const getOrganizationPositionById = (id_location) => {
+export const getOrganizationPositionById = (id_organization_position) => {
   const SQLQuery = `
     SELECT *
     FROM organization_positions
     WHERE id_organization_position = ?`;
 
-  return dbPool.execute(SQLQuery, [id_location]);
+  return dbPool.execute(SQLQuery, [id_organization_position]);
 };
 
 export const createOrganizationPosition = (
