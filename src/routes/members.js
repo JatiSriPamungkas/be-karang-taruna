@@ -9,6 +9,7 @@ import {
   activateMember,
   updateStatusMember,
   getActiveApprovedMember,
+  getActiveApprovedMemberForMeeting,
 } from "../controller/members.js";
 import { createMember } from "../controller/members.js";
 
@@ -17,6 +18,7 @@ export const router = Router();
 router.get("/", getMember);
 router.get("/credentials", getCredentialMember);
 router.get("/active-approved", getActiveApprovedMember);
+router.get("/active-approved-for-meeting", getActiveApprovedMemberForMeeting);
 router.get("/:id_member", getMemberById);
 
 router.post("/", createMember);

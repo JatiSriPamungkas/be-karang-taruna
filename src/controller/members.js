@@ -9,6 +9,7 @@ import {
   activateMemberById,
   updateStatusMembers,
   getAllActiveApprovedMember,
+  getAllActiveApprovedMemberForMeeting,
 } from "../models/members.js";
 
 export const getMember = async (req, res) => {
@@ -263,6 +264,22 @@ export const updateStatusMember = async (req, res) => {
 export const getActiveApprovedMember = async (req, res) => {
   try {
     const [data] = await getAllActiveApprovedMember();
+
+    res.status(200).json({
+      message: "GET: Success to get all active approved member",
+      data: data,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "GET: Failed to get all active approved member",
+      error: err,
+    });
+  }
+};
+
+export const getActiveApprovedMemberForMeeting = async (req, res) => {
+  try {
+    const [data] = await getAllActiveApprovedMemberForMeeting();
 
     res.status(200).json({
       message: "GET: Success to get all active approved member",
