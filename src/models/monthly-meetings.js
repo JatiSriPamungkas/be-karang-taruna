@@ -21,7 +21,7 @@ export const getMonthlyMeetingsDataTable = async (per_page, page, search) => {
   //   dataLocation,
   //   countLocation: countLocation[0].total,
   // };
-  const SQLQuery = `SHOW CREATE TABLES monthly_meetings`;
+  const SQLQuery = `SHOW CREATE TABLE monthly_meetings`;
 
   return dbPool.execute(SQLQuery);
 };
