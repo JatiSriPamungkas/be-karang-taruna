@@ -21,15 +21,11 @@ export const insertPosition = (
 };
 
 export const getOrganizationPositionByPeriod = (id_organization_period) => {
-  // const SQLQuery = `
-  //   SELECT os.*, op.name
-  //   FROM organization_structure os
-  //   LEFT JOIN organization_positions op ON op.id_organization_position = os.id_organization_position
-  //   WHERE os.id_organization_periode = ?`;
-
-  // return dbPool.execute(SQLQuery, [id_organization_period]);
   const SQLQuery = `
-    ALTER TABLE organization_structure MODIFY COLUMN id_member INT DEFAULT NULL;`;
+    SELECT os.*, op.name
+    FROM organization_structure os
+    LEFT JOIN organization_positions op ON op.id_organization_position = os.id_organization_position
+    WHERE os.id_organization_periode = ?`;
 
-  return dbPool.execute(SQLQuery);
+  return dbPool.execute(SQLQuery, [id_organization_period]);
 };
