@@ -287,7 +287,7 @@ export const getActiveApprovedMemberForMeeting = async (req, res) => {
 
     res.status(200).json({
       message: "GET: Success to get all active approved member",
-      data: data[0],
+      data: data,
     });
   } catch (err) {
     res.status(500).json({
