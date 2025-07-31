@@ -38,7 +38,7 @@ export const updateOrganizationPeriod = (
   last_update_by
 ) => {
   const SQLQuery = `
-    UPDATE organization_period
+    UPDATE organization_periode
     SET start_periode = ?,
       end_periode = ?,
       description = ?,
