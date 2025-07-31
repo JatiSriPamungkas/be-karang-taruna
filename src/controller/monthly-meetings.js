@@ -65,12 +65,13 @@ export const monthlyMeetingsById = async (req, res) => {
 };
 
 export const addMonthlyMeetings = async (req, res) => {
-  const { id_member, created_by } = req.body;
+  const { id_member, created_by, id_monthly_contribution } = req.body;
 
   try {
     const id_monthly_meeting = await insertMonthlyMeeting(
       id_member,
-      created_by
+      created_by,
+      id_monthly_contribution
     );
 
     res.status(200).json({

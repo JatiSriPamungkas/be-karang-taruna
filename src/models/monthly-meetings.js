@@ -37,11 +37,19 @@ export const getMonthlyMeetingsById = (id_monthly_meeting) => {
   return dbPool.execute(SQLQuery, [id_monthly_meeting]);
 };
 
-export const insertMonthlyMeeting = async (id_member, created_by) => {
-  const SQLQuery = `INSERT INTO montlhy_meetings (host, meeting_date, creation_date, created_by)
-                    VALUES (?, CURDATE(), NOW(), ?)`;
+export const insertMonthlyMeeting = async (
+  id_member,
+  created_by,
+  id_monthly_contribution
+) => {
+  const SQLQuery = `INSERT INTO montlhy_meetings (host, meeting_date, creation_date, created_by, id_monthly_contribution)
+                    VALUES (?, CURDATE(), NOW(), ?, ?)`;
 
-  const [result] = await dbPool.execute(SQLQuery, [id_member, created_by]);
+  const [result] = await dbPool.execute(SQLQuery, [
+    id_member,
+    created_by,
+    id_monthly_contribution,
+  ]);
 
   const newMeetingId = result.insertId;
   return newMeetingId;
