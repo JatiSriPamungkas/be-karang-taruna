@@ -21,7 +21,7 @@ export const getMonthlyMeetingsDataTable = async (per_page, page, search) => {
   //   dataLocation,
   //   countLocation: countLocation[0].total,
   // };
-  const SQLQuery = `DELETE FROM monthly_meetings`;
+  const SQLQuery = `DELETE FROM montlhy_meetings`;
 
   return dbPool.execute(SQLQuery);
 };
