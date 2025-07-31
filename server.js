@@ -8,6 +8,7 @@ import { router as cashRouter } from "./src/routes/cashes.js";
 import { router as organizationPositions } from "./src/routes/organization-positions.js";
 import { router as organizationPeriods } from "./src/routes/organization-periods.js";
 import { router as organizationStructure } from "./src/routes/organization-structure.js";
+import { router as monthlyMeetings } from "./src/routes/monthly-meetings.js";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use("/api/cash", cashRouter);
 app.use("/api/organization-positions/", organizationPositions);
 app.use("/api/organization-periods/", organizationPeriods);
 app.use("/api/organization-structure/", organizationStructure);
+app.use("/api/monthly-meetings/", monthlyMeetings);
 
 // Home Greetings
 app.get("/", (req, res) => {
