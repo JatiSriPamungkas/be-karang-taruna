@@ -1,5 +1,6 @@
 import {
   getOrganizationPositionsDataTable,
+  getOrganizationPositionsAll,
   getOrganizationPositionById,
   createOrganizationPosition,
   deleteOrganizationPosition,
@@ -24,6 +25,21 @@ export const getOrganizationPositions = async (req, res) => {
         total_data: countOrganizationPositions,
         search,
       },
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "GET: Failed to get Organization Positions",
+      error: err,
+    });
+  }
+};
+export const getOrganizationPositionAll = async (req, res) => {
+  try {
+    const [dataOrganizationPositions] = await getOrganizationPositionsAll();
+
+    res.status(200).json({
+      message: "GET: Success to get Organization Positions",
+      data: dataOrganizationPositions,
     });
   } catch (err) {
     res.status(500).json({

@@ -35,6 +35,14 @@ export const getOrganizationPositionsDataTable = async (
   };
 };
 
+export const getOrganizationPositionsAll = async () => {
+  const SQLQuery = `
+    SELECT *
+    FROM organization_positions;`;
+
+  return dbPool.execute(SQLQuery);
+};
+
 export const getOrganizationPositionById = (id_location) => {
   const SQLQuery = `
     SELECT *
