@@ -54,7 +54,7 @@ export const getAllActiveApprovedMemberForMeeting = async (
     FROM members m
     LEFT JOIN locations s ON s.id_location = m.id_location_detail
     WHERE m.status = 'approved' AND m.is_active = true
-      AND m.id_member NOT IN (SELECT * FROM monthly_meetings_sequence WHERE id_monthly_meeting = ?)
+      AND m.id_member NOT IN (SELECT id_member FROM monthly_meetings_sequence WHERE id_monthly_meeting = ?)
     ORDER BY m.fullname ASC`;
 
   return dbPool.execute(SQLQuery, [id_monthly_meeting]);
