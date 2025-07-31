@@ -16,8 +16,8 @@ export const router = Router();
 
 router.get("/", getMember);
 router.get("/credentials", getCredentialMember);
-router.get("/:id_member", getMemberById);
 router.get("/active-approved", getActiveApprovedMember);
+router.get("/:id_member", getMemberById);
 
 router.post("/", createMember);
 
