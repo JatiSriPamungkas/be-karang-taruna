@@ -25,7 +25,8 @@ export const getOrganizationPositionByPeriod = (id_organization_period) => {
     SELECT os.*, op.name
     FROM organization_structure os
     LEFT JOIN organization_positions op ON op.id_organization_position = os.id_organization_position
-    WHERE os.id_organization_periode = ?`;
+    WHERE os.id_organization_periode = ?
+    ORDER BY op.id_organization_position ASC`;
 
   return dbPool.execute(SQLQuery, [id_organization_period]);
 };

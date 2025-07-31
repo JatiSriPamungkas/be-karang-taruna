@@ -8,6 +8,7 @@ import {
   deactivateMemberById,
   activateMemberById,
   updateStatusMembers,
+  getAllActiveApprovedMember,
 } from "../models/members.js";
 
 export const getMember = async (req, res) => {
@@ -254,6 +255,22 @@ export const updateStatusMember = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "PATCH: Failed to update members, " + err,
+      error: err,
+    });
+  }
+};
+
+export const getActiveApprovedMember = async (req, res) => {
+  try {
+    const [data] = await getAllActiveApprovedMember();
+
+    res.status(200).json({
+      message: "GET: Success to get all active approved member",
+      data: data,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "GET: Failed to get all active approved member",
       error: err,
     });
   }

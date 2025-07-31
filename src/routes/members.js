@@ -8,6 +8,7 @@ import {
   deactivateMember,
   activateMember,
   updateStatusMember,
+  getActiveApprovedMember,
 } from "../controller/members.js";
 import { createMember } from "../controller/members.js";
 
@@ -16,6 +17,7 @@ export const router = Router();
 router.get("/", getMember);
 router.get("/credentials", getCredentialMember);
 router.get("/:id_member", getMemberById);
+router.get("/active-approved", getActiveApprovedMember);
 
 router.post("/", createMember);
 
