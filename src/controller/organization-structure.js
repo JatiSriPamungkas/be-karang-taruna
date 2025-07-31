@@ -41,12 +41,12 @@ export const getPositionsByPeriod = async (req, res) => {
     if (data.length > 0) {
       res.status(200).json({
         message: "GET: Success to get organization position by period",
-        data: data[0],
+        data: data,
       });
     } else {
       res.status(404).json({
         message: `Not Found: Organization position with period ${id_organization_period} not found!`,
-        data: data[0],
+        data: data,
       });
     }
   } catch (err) {
