@@ -21,8 +21,7 @@ export const getMonthlyMeetingsDataTable = async (per_page, page, search) => {
   //   dataLocation,
   //   countLocation: countLocation[0].total,
   // };
-  const SQLQuery = `ALTER TABLE montlhy_meetings
-ADD COLUMN id_monthly_contribution INT;`;
+  const SQLQuery = `SELECT * FROM monthly_contribution`;
 
   return dbPool.execute(SQLQuery);
 };
