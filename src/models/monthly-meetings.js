@@ -21,14 +21,17 @@ export const getMonthlyMeetingsDataTable = async (per_page, page, search) => {
   //   dataLocation,
   //   countLocation: countLocation[0].total,
   // };
-  const SQLQuery = `ALTER TABLE montlhy_meetings
-ADD COLUMN is_finish BOOLEAN;`;
+  const SQLQuery = `SELECT * FROM montlhy_meetings`;
 
   return dbPool.execute(SQLQuery);
 };
 
-export const insertMonthlyMeeting = (id_member, created_by) => {
+export const insertMonthlyMeeting = async (id_member, created_by) => {
   const SQLQuery = `INSERT INTO montlhy_meetings (host, meeting_date, creation_date, created_by)
                     VALUES (?, CURDATE(), NOW(), ?)`;
-  return dbPool.execute(SQLQuery, [id_member, created_by]);
+
+  const [result] = await dbPool.execute(SQLQuery, [id_member, created_by]);
+
+  const newMeetingId = result.insertId;
+  return newMeetingId;
 };

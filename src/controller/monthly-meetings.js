@@ -42,13 +42,15 @@ export const addMonthlyMeetings = async (req, res) => {
   const { id_member, created_by } = req.body;
 
   try {
-    await insertMonthlyMeeting(id_member, created_by);
+    const id_monthly_meeting = await insertMonthlyMeeting(
+      id_member,
+      created_by
+    );
 
     res.status(200).json({
       message: "POST: Success to start monthly meetings",
       data: {
-        id_member,
-        created_by,
+        id_monthly_meeting: id_monthly_meeting,
       },
     });
   } catch (err) {
