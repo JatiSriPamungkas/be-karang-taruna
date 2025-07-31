@@ -109,15 +109,16 @@ export const nominalBill = async (req, res) => {
 };
 
 export const nominalPaidByMember = async (req, res) => {
-  const { id_member } = req.params;
+  const { id_member, id_monthly_meeting } = req.query;
 
   try {
-    const [data] = await getNominalPaidByMember(id_member);
+    const [data] = await getNominalPaidByMember(id_member, id_monthly_meeting);
 
     res.status(200).json({
       message: "GET: Success to get nominal paid by member",
       data: {
         id_member: id_member,
+        id_monthly_meeting: id_monthly_meeting,
         nominalPaid: Number(data[0].nominalPaid),
       },
     });
