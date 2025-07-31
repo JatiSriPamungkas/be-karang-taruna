@@ -50,7 +50,7 @@ export const updateStructureMember = (
   ]);
 };
 
-export const deleteStructure = (id_organization_structure) => {
+export const deleteStructureFromPeriod = (id_organization_structure) => {
   const SQLQuery = `DELETE FROM organization_structure WHERE id_organization_structure = ?`;
 
   return dbPool.execute(SQLQuery, [id_organization_structure]);
