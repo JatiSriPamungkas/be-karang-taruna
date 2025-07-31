@@ -7,6 +7,7 @@ import { router as memberRouter } from "./src/routes/members.js";
 import { router as cashRouter } from "./src/routes/cashes.js";
 import { router as organizationPositions } from "./src/routes/organization-positions.js";
 import { router as organizationPeriods } from "./src/routes/organization-periods.js";
+import { router as organizationStructure } from "./src/routes/organization-structure.js";
 
 dotenv.config();
 
@@ -26,18 +27,19 @@ app.use("/api/members", memberRouter);
 app.use("/api/cash", cashRouter);
 app.use("/api/organization-positions/", organizationPositions);
 app.use("/api/organization-periods/", organizationPeriods);
+app.use("/api/organization-structure/", organizationStructure);
 
 // Home Greetings
 app.get("/", (req, res) => {
-	res.send("<h1>Hello from Server.ts</h1>");
+  res.send("<h1>Hello from Server.ts</h1>");
 });
 
 // Fallback
 app.use((req, res) => {
-	res.send("<h1>Page not found!</h1>");
+  res.send("<h1>Page not found!</h1>");
 });
 
 // Listener
-app.listen(PORT, '0.0.0.0', () => {
-	console.log(`Server is listening at http://20.2.85.195:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server is listening at http://20.2.85.195:${PORT}`);
 });
