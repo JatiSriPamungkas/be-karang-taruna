@@ -2,7 +2,7 @@ import {
   insertPosition,
   getOrganizationPositionByPeriod,
   updateStructureMember,
-  deleteStructure
+  deleteStructureFromPeriod
 } from "../models/organization-structure.js";
 
 export const addPosition = async (req, res) => {
@@ -89,7 +89,7 @@ export const deleteStructure = async (req, res) => {
   const { id_organization_structure } = req.params;
 
   try {
-    await deleteStructure(id_organization_structure);
+    await deleteStructureFromPeriod(id_organization_structure);
 
     res.status(200).json({
       message: "DELETE: Success to delete organization structure!",
