@@ -37,9 +37,13 @@ export const getMembers = async (per_page, page, search, status) => {
 };
 
 export const getAllActiveApprovedMember = async () => {
-	const SQLQuery = `SELECT * FROM members WHERE status = 'approved' AND is_active = true;`;
+  const SQLQuery = `
+    SELECT m.*, s.location_name 
+    FROM members m
+    LEFT JOIN locations s ON s.id_location = m.id_location_detail
+    WHERE m.status = 'approved' AND m.is_active = true;`;
 
-	return dbPool.execute(SQLQuery);
+  return dbPool.execute(SQLQuery);
 };
 
 export const selectMemberById = (id_member) => {
