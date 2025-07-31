@@ -21,7 +21,7 @@ export const getMonthlyMeetingsDataTable = async (per_page, page, search) => {
   //   dataLocation,
   //   countLocation: countLocation[0].total,
   // };
-  const SQLQuery = `SELECT * FROM montlhy_meetings`;
+  const SQLQuery = `SHOW CREATE TABLE monthly_meeting_lines`;
 
   return dbPool.execute(SQLQuery);
 };
@@ -60,6 +60,15 @@ export const getNominalBill = async () => {
     SELECT SUM(mc.nominal) AS 'nominalBill'
     FROM montlhy_meetings mm
     LEFT JOIN monthly_contribution mc ON mc.id_monthly_contribution = mm.id_monthly_contribution`;
+
+  return dbPool.execute(SQLQuery);
+};
+
+export const getNominalPaidByMember = async (id_member) => {
+  const SQLQuery = `
+    SELECT
+    FROM montlhy_meetings
+    LEFT JOIN monthly_meeting_line`;
 
   return dbPool.execute(SQLQuery);
 };
