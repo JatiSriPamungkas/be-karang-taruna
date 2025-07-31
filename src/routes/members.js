@@ -18,7 +18,7 @@ export const router = Router();
 router.get("/", getMember);
 router.get("/credentials", getCredentialMember);
 router.get("/active-approved", getActiveApprovedMember);
-router.get("/active-approved-for-meeting", getActiveApprovedMemberForMeeting);
+router.get("/active-approved-for-meeting/:id_monthly_meeting", getActiveApprovedMemberForMeeting);
 router.get("/:id_member", getMemberById);
 
 router.post("/", createMember);

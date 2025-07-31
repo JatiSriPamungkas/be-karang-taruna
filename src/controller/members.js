@@ -278,8 +278,12 @@ export const getActiveApprovedMember = async (req, res) => {
 };
 
 export const getActiveApprovedMemberForMeeting = async (req, res) => {
+  const { id_monthly_meeting } = req.params;
+
   try {
-    const [data] = await getAllActiveApprovedMemberForMeeting();
+    const [data] = await getAllActiveApprovedMemberForMeeting(
+      id_monthly_meeting
+    );
 
     res.status(200).json({
       message: "GET: Success to get all active approved member",

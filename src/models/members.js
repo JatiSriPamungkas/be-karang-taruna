@@ -46,15 +46,18 @@ export const getAllActiveApprovedMember = async () => {
   return dbPool.execute(SQLQuery);
 };
 
-export const getAllActiveApprovedMemberForMeeting = async () => {
+export const getAllActiveApprovedMemberForMeeting = async (
+  id_monthly_meeting
+) => {
   const SQLQuery = `
     SELECT m.*, s.location_name 
     FROM members m
     LEFT JOIN locations s ON s.id_location = m.id_location_detail
     WHERE m.status = 'approved' AND m.is_active = true
+      AND m.id_member NOT IN (SELECT * FROM monthly_meetings_sequence WHERE id_monthly_meeting = ?)
     ORDER BY m.fullname ASC`;
 
-  return dbPool.execute(SQLQuery);
+  return dbPool.execute(SQLQuery, [id_monthly_meeting]);
 };
 
 export const selectMemberById = (id_member) => {
