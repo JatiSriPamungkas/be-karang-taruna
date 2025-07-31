@@ -2,6 +2,7 @@ import {
   getMonthlyMeetingsDataTable,
   insertMonthlyMeeting,
   getMonthlyMeetingsById,
+  getNominalBill,
 } from "../models/monthly-meetings.js";
 import dotenv from "dotenv";
 
@@ -83,6 +84,24 @@ export const addMonthlyMeetings = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "POST: Failed to start monthly meetings",
+      error: err,
+    });
+  }
+};
+
+export const nominalBill = async (req, res) => {
+  try {
+    const [data] = await getNominalBill();
+
+    res.status(200).json({
+      message: "GET: Success to get nominal bill",
+      data: {
+        nominalBill: data[0].nominalBill,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "GET: Failed to get nominal bill",
       error: err,
     });
   }
