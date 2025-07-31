@@ -21,7 +21,7 @@ export const getMonthlyMeetingsDataTable = async (per_page, page, search) => {
   //   dataLocation,
   //   countLocation: countLocation[0].total,
   // };
-  const SQLQuery = `SELECT * FROM montlhy_meetings`;
+  const SQLQuery = `CREATE TABLE monthly_meetings_sequence (id_sequence INT PRIMARY KEY AUTO_INCREMENT, id_monthly_meeting INT, id_member INT)`;
 
   return dbPool.execute(SQLQuery);
 };
