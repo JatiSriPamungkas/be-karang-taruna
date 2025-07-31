@@ -44,7 +44,7 @@ export const updateOrganizationPeriod = (
       description = ?,
       last_update_date = NOW(),
       last_update_by = ?
-    WHERE id_organization_position = ?`;
+    WHERE id_organization_periode = ?`;
 
   return dbPool.execute(SQLQuery, [
     start_period,
