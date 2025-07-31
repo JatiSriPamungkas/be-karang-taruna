@@ -1,6 +1,7 @@
 import {
   getAllOrganizationPeriods,
   insertOrganizationPeriod,
+  updateOrganizationPeriod,
 } from "../models/organization-periods.js";
 
 export const getOrganizationPeriods = async (req, res) => {
@@ -42,6 +43,42 @@ export const submitOrganizationPeriod = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "POST: Failed to add new organization period" + err,
+      error: err,
+    });
+  }
+};
+
+export const patchOrganizationPeriod = async (req, res) => {
+  const {
+    id_organization_period,
+    start_period,
+    end_period,
+    description,
+    last_update_by,
+  } = req.body;
+
+  try {
+    await updateOrganizationPeriod(
+      id_organization_period,
+      start_period,
+      end_period,
+      description,
+      last_update_by
+    );
+
+    res.status(200).json({
+      message: "PATCH: Success to update organization period",
+      data: {
+        id_organization_period,
+        start_period,
+        end_period,
+        description,
+        last_update_by,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "PATCH: Failed to update organization period",
       error: err,
     });
   }

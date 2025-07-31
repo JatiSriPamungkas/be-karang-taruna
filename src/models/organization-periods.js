@@ -29,3 +29,28 @@ export const insertOrganizationPeriod = (
     created_by,
   ]);
 };
+
+export const updateOrganizationPeriod = (
+  id_organization_period,
+  start_period,
+  end_period,
+  description,
+  last_update_by
+) => {
+  const SQLQuery = `
+    UPDATE organization_period
+    SET start_periode = ?,
+      end_periode = ?,
+      description = ?,
+      last_update_date = NOW(),
+      last_update_by = ?
+    WHERE id_organization_position = ?`;
+
+  return dbPool.execute(SQLQuery, [
+    start_period,
+    end_period,
+    description,
+    last_update_by,
+    id_organization_period,
+  ]);
+};
