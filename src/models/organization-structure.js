@@ -29,7 +29,7 @@ export const getOrganizationPositionByPeriod = (id_organization_period) => {
 
   // return dbPool.execute(SQLQuery, [id_organization_period]);
   const SQLQuery = `
-    SHOW CREATE TABLE organization_structure`;
+    ALTER TABLE organization_structure MODIFY COLUMN id_member INT DEFAULT NULL;`;
 
   return dbPool.execute(SQLQuery);
 };
