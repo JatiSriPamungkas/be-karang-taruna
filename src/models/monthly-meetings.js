@@ -28,9 +28,10 @@ export const getMonthlyMeetingsDataTable = async (per_page, page, search) => {
 
 export const getMonthlyMeetingsById = (id_monthly_meeting) => {
   const SQLQuery = `
-    SELECT mm.*, m.fullname AS 'hostname'
+    SELECT mm.*, m.fullname AS 'hostname', mc.nominal
     FROM montlhy_meetings mm
     LEFT JOIN members m ON m.id_member = mm.host
+    LEFT JOIN monthly_contribution mc ON mc.id_monthly_contribution = mm.id_monthly_contribution
     WHERE mm.id_monthly_meeting = ?`;
 
   return dbPool.execute(SQLQuery, [id_monthly_meeting]);
