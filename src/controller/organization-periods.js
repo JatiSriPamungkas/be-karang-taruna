@@ -78,7 +78,7 @@ export const patchOrganizationPeriod = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
-      message: "PATCH: Failed to update organization period",
+      message: "PATCH: Failed to update organization period" + err,
       error: err,
     });
   }
