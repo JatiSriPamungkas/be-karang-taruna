@@ -1,7 +1,8 @@
 import {
   insertPosition,
   getOrganizationPositionByPeriod,
-  updateStructureMember
+  updateStructureMember,
+  deleteStructure
 } from "../models/organization-structure.js";
 
 export const addPosition = async (req, res) => {
@@ -79,6 +80,24 @@ export const setPositionMember = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "POST: Failed to select member to structure" + err,
+      error: err,
+    });
+  }
+};
+
+export const deleteStructure = async (req, res) => {
+  const { id_organization_structure } = req.params;
+
+  try {
+    await deleteStructure(id_organization_structure);
+
+    res.status(200).json({
+      message: "DELETE: Success to delete organization structure!",
+      data: null,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "DELETE: Failed to delete organization structure!",
       error: err,
     });
   }
