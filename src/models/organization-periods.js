@@ -54,3 +54,9 @@ export const updateOrganizationPeriod = (
     id_organization_period,
   ]);
 };
+
+export const dropOrganizationPeriod = (id_organization_period) => {
+  const SQLQuery = `DELETE FROM organization_periode WHERE id_organization_periode = ?`;
+
+  return dbPool.execute(SQLQuery, [id_organization_period]);
+};

@@ -55,3 +55,9 @@ export const deleteStructureFromPeriod = (id_organization_structure) => {
 
   return dbPool.execute(SQLQuery, [id_organization_structure]);
 };
+
+export const dropStructureByOrganizationPeriod = (id_organization_period) => {
+  const SQLQuery = `DELETE FROM organization_structure WHERE id_organization_periode = ?`;
+
+  return dbPool.execute(SQLQuery, [id_organization_period]);
+};

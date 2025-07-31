@@ -2,7 +2,10 @@ import {
   getAllOrganizationPeriods,
   insertOrganizationPeriod,
   updateOrganizationPeriod,
-} from "../models/organization-periods.js";
+  dropOrganizationPeriod,
+} from "../models/organization-periods.js";import {
+  dropStructureByOrganizationPeriod,
+} from "../models/organization-structure.js";
 
 export const getOrganizationPeriods = async (req, res) => {
   try {
@@ -79,6 +82,25 @@ export const patchOrganizationPeriod = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "PATCH: Failed to update organization period" + err,
+      error: err,
+    });
+  }
+};
+
+export const deleteOrganizationPeriod = async (req, res) => {
+  const { id_organization_period } = req.params;
+
+  try {
+    await dropOrganizationPeriod(id_organization_period);
+    await dropStructureByOrganizationPeriod(id_organization_period);
+
+    res.status(200).json({
+      message: "DELETE: Success to delete organization period!",
+      data: null,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "DELETE: Failed to delete organization period!",
       error: err,
     });
   }
