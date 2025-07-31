@@ -3,6 +3,7 @@ import {
   insertMonthlyMeeting,
   getMonthlyMeetingsById,
   getNominalBill,
+  getNominalPaidByMember,
 } from "../models/monthly-meetings.js";
 import dotenv from "dotenv";
 
@@ -102,6 +103,27 @@ export const nominalBill = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "GET: Failed to get nominal bill",
+      error: err,
+    });
+  }
+};
+
+export const nominalPaidByMember = async (req, res) => {
+  const { id_member } = req.params;
+
+  try {
+    const [data] = await getNominalPaidByMember(id_member);
+
+    res.status(200).json({
+      message: "GET: Success to get nominal paid by member",
+      data: {
+        id_member: id_member,
+        nominalPaid: Number(data[0].nominalPaid),
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "GET: Failed to get nominal paid by member",
       error: err,
     });
   }

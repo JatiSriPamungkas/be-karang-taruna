@@ -66,9 +66,10 @@ export const getNominalBill = async () => {
 
 export const getNominalPaidByMember = async (id_member) => {
   const SQLQuery = `
-    SELECT
-    FROM montlhy_meetings
-    LEFT JOIN monthly_meeting_line`;
+    SELECT SUM(mml.nominal) AS 'nominalPaid'
+    FROM montlhy_meetings mm
+    LEFT JOIN monthly_meeting_lines mml ON mml.id_monthly_meeting = mm.id_monthly_meeting
+    WHERE mml.id_member = ?`;
 
-  return dbPool.execute(SQLQuery);
+  return dbPool.execute(SQLQuery, [id_member]);
 };
