@@ -96,7 +96,7 @@ export const nominalBill = async (req, res) => {
     res.status(200).json({
       message: "GET: Success to get nominal bill",
       data: {
-        nominalBill: data[0].nominalBill,
+        nominalBill: Number(data[0].nominalBill),
       },
     });
   } catch (err) {
